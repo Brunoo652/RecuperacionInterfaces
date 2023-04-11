@@ -9,7 +9,6 @@ def on_button_clicked(self):
     w.show_all()
 
 
-
 class FirstWindow(Gtk.Window):
     box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
     button = Gtk.Button(label="Listar videojuegos")
