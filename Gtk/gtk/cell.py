@@ -12,6 +12,11 @@ class Cell(Gtk.EventBox):
         self.image = image
 
         box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=4)
-#        self.box.pack_start(Gtk.Label(label=name), False, False, 0)
-#        self.box.pack_start(image, True, True, 0)
+        box.pack_start(Gtk.Label(label=name), False, False, 0)
+        box.pack_start(image, True, True, 0)
         self.add(box)
+        self.connect("button-release-event", self.on_click)
+
+    def on_click(self, widget, event):
+        print ("Se ha seleccionado la celda")
+

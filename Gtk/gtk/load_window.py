@@ -2,6 +2,8 @@ import shutil
 import threading
 import gi
 import requests
+from gi.overrides import GdkPixbuf
+
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, GLib
 from window_catalog import MainWindow
@@ -32,7 +34,7 @@ class LoadWindow(Gtk.Window):
         thread.start()
 
     def load_json(self):
-        response = requests.get('https://raw.githubusercontent.com/Brunoo652/RecuperacionInterfaces/main/Gtk/json/json.py')
+        response = requests.get('https://raw.githubusercontent.com/Brunoo652/RecuperacionInterfaces/main/Gtk/json/json.json')
         json_list = response.json()
 
         result = []
@@ -44,8 +46,12 @@ class LoadWindow(Gtk.Window):
             r = requests.get(image_url, stream=True)
             with open("temp.jpg", 'wb') as f:
                 shutil.copyfileobj(r.raw, f)
-            image = Gtk.Image.new_from_file("temp.jpg")
-            result.append({"nombre": nombre, "descripcion": descripcion, "image_url": image})
+            #image = Gtk.Image.new_from_file("temp.jpg")
+            image = Gtk.Image()
+            pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale("temp.jpg", 300, 300, False)
+            image.set_from_pixbuf(pixbuf)
+            result.append({"nombre": nombre, "descripcion": descripcion, "image": image})
+
 
         GLib.idle_add(self.start_first_window, result)
 
