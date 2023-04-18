@@ -3,7 +3,6 @@ import threading
 import gi
 import requests
 from gi.overrides import GdkPixbuf
-
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, GLib
 from window_catalog import MainWindow
@@ -51,7 +50,6 @@ class LoadWindow(Gtk.Window):
             pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale("temp.jpg", 300, 300, False)
             image.set_from_pixbuf(pixbuf)
             result.append({"nombre": nombre, "descripcion": descripcion, "image": image})
-
 
         GLib.idle_add(self.start_first_window, result)
 
