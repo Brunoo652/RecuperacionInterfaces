@@ -1,4 +1,6 @@
 import gi
+from gi.overrides.GdkPixbuf import GdkPixbuf
+
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
 from widow_detail import WindowDetail
@@ -20,7 +22,10 @@ class Cell(Gtk.EventBox):
         self.connect("button-release-event", self.on_click)
 
     def on_click(self, widget, event):
-        #print ("Se ha seleccionado la celda")
-        w = WindowDetail(self.image, self.descripcion, self.name)
+        #rescalar la imagen para el window_datail
+        imagenNueva = Gtk.Image()
+        imagenNueva.set_from_pixbuf(self.image.get_pixbuf().scale_simple(500, 500, GdkPixbuf.InterpType.BILINEAR))
+
+        w = WindowDetail(imagenNueva, self.descripcion, self.name)
         w.show_all()
 

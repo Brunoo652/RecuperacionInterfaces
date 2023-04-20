@@ -8,7 +8,7 @@ from gi.repository import Gtk
 class WindowDetail(Gtk.Window):
     flowbox = Gtk.FlowBox()
 
-    def __init__(self, image, descripcion, name):
+    def __init__(self, imagenNueva, descripcion, name):
         super().__init__()
         self.name = name
         self.descripcion = descripcion
@@ -29,8 +29,7 @@ class WindowDetail(Gtk.Window):
         box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
         self.flowbox.add(box)
 
-        imagenNueva = Gtk.Image()
-        imagenNueva.set_from_pixbuf(image.get_pixbuf())
+
 
         box.pack_start(Gtk.Label(label=self.name), False, False, 0)
 
