@@ -1,7 +1,7 @@
 package com.afundacion.myaplication;
 
 import android.os.Bundle;
-import android.widget.Toolbar;
+import androidx.appcompat.widget.Toolbar;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,6 +27,7 @@ public class HomeActivity extends AppCompatActivity {
         toggle.syncState();
     }
 
+    //cierre del menú con la pulsación del botón Atrás o back de Android.
     @Override
     public void onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
