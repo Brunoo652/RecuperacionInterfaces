@@ -9,7 +9,7 @@ class MainWindow(Gtk.Window):
 
     def __init__(self, data_source):
         super().__init__()
-        self.connect("destroy", Gtk.main_quit)
+       # self.connect("destroy", Gtk.main_quit)
         self.set_border_width(15)
         self.set_default_size(400, 400)
 

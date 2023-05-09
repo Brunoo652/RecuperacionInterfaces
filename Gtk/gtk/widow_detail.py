@@ -12,7 +12,7 @@ class WindowDetail(Gtk.Window):
         super().__init__()
         self.name = name
         self.descripcion = descripcion
-        self.connect("destroy", Gtk.main_quit)
+      #  self.connect("destroy", Gtk.main_quit)
         self.set_border_width(15)
         self.set_default_size(400, 400)
 
@@ -29,11 +29,13 @@ class WindowDetail(Gtk.Window):
         box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
         self.flowbox.add(box)
 
-
-
         box.pack_start(Gtk.Label(label=self.name), False, False, 0)
 
         box.pack_start(imagenNueva, False, False, 0)
 
-        box.pack_start(Gtk.Label(label=self.descripcion), False, False, 0)
+        self.textview = Gtk.TextView()
+        self.textbuffer = self.textview.get_buffer()
+        self.textbuffer.set_text(self.descripcion)
+        self.textview.set_wrap_mode(Gtk.WrapMode.WORD_CHAR)
 
+        box.pack_start(self.textview, False, False, 0)
