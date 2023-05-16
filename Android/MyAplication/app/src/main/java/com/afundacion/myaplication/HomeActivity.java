@@ -53,17 +53,47 @@ public class HomeActivity extends AppCompatActivity
         showFragment(titleId);
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
+
+
     }
 
     private void showFragment(int titleId) {
-        Fragment fragment = HomeFragment.newInstance(titleId);
-        getSupportFragmentManager()
-                .beginTransaction()
+        Fragment fragment;
 
-                .replace(R.id.home_content, fragment)
-                .commit();
 
         setTitle(getString(titleId));
+        switch (titleId){
+
+            case R.string.menu_inicio:
+                fragment = HomeFragment.newInstance(titleId);
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.home_content, fragment)
+                        .commit();
+                break;
+
+
+            case R.string.menu_listado:
+                fragment = ListadoVideojuegos.newInstance(titleId);
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.home_content, fragment)
+                        .commit();
+                break;
+
+
+            case R.string.menu_acercade:
+                fragment = AcercaDe.newInstance(titleId);
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.home_content, fragment)
+                        .commit();
+                break;
+
+
+        }
+
+
     }
 
     private int getTitle(@NonNull MenuItem menuItem) {
