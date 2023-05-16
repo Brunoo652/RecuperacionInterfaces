@@ -4,11 +4,13 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -61,9 +63,34 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
-
-        //    View view = inflater.inflate(R.layout.fragment_home,container, false);
         return inflater.inflate(R.layout.fragment_home, container, false);
+    }
+
+    private static final String TEXT_ID = "text_id";
+
+    public static HomeFragment newInstance(@StringRes int textId) {
+        HomeFragment frag = new HomeFragment();
+
+        Bundle args = new Bundle();
+        args.putInt(TEXT_ID, textId);
+        frag.setArguments(args);
+
+        return frag;
+    }
+
+
+    public View onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState, LayoutInflater inflater, ViewGroup container) {
+        super.onViewCreated(view, savedInstanceState);
+
+        View layout = inflater.inflate(R.layout.fragment_home, container, false);
+
+        if (getArguments() != null) {
+            String text = getString(getArguments().getInt(TEXT_ID));
+            ((TextView) layout.findViewById(R.id.text)).setText(text);
+        } else {
+            throw new IllegalArgumentException("Argument " + TEXT_ID + " is mandatory");
+        }
+
+        return layout;
     }
 }
