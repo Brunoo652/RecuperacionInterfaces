@@ -8,50 +8,43 @@
     android:gravity="center"
     android:orientation="vertical">
 
+
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="180dp"
-        android:scaleType="fitCenter"
-        android:visibility="visible"
+        android:id="@+id/imageView2"
+        android:layout_width="197dp"
+        android:layout_height="181dp"
         app:layout_constraintBottom_toTopOf="@+id/text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars"
-        tools:visibility="visible" />
+        app:srcCompat="@drawable/ic_launcher_foreground"
+        tools:srcCompat="@drawable/ic_launcher_foreground" />
 
     <TextView
         android:id="@+id/text"
-        style="@android:style/TextAppearance.Large"
-        android:layout_width="316dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="20dp"
+        android:layout_width="261dp"
+        android:layout_height="44dp"
+        android:layout_marginBottom="192dp"
         android:text="Bruno Reboredo Álvarez"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/textVideojuegos"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/textView2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textVideojuegos"
-        style="@android:style/TextAppearance.Large"
-        android:layout_width="316dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="42dp"
-        android:layout_marginBottom="40dp"
-        android:text="Pokemon, Zelda, Detroit"
-        android:textStyle="bold"
+        android:id="@+id/textView2"
+        android:layout_width="277dp"
+        android:layout_height="62dp"
+        android:layout_marginBottom="60dp"
+        android:text="Metroid Prime, Zelda BOTW, Dragon Quest IX "
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text" />
-
-
-
-
-
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

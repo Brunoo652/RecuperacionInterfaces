@@ -2,6 +2,7 @@ package com.afundacion.myaplication;
 
 
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -78,6 +79,7 @@ public class AcercaDe extends Fragment {
 
         return frag;
     }
+    @SuppressLint("MissingInflatedId")
     public View onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState, LayoutInflater inflater, ViewGroup container) {
         super.onViewCreated(view, savedInstanceState);
 
@@ -85,7 +87,7 @@ public class AcercaDe extends Fragment {
 
         if (getArguments() != null) {
             String text = getString(getArguments().getInt(TEXT_ID));
-            ((TextView) layout.findViewById(R.id.text)).setText(text);
+            ((TextView) layout.findViewById(R.id.textAcercaDe)).setText(text);
         } else {
             throw new IllegalArgumentException("Argument " + TEXT_ID + " is mandatory");
         }
