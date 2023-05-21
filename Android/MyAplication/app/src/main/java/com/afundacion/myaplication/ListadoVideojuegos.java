@@ -61,11 +61,19 @@ public class ListadoVideojuegos extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_listado_videojuegos, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_listado_videojuegos, container, false);
+
+        View recyclerView = view.findViewById(R.id.recyclerView);
+     //   recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+     //   adapter = new MyAdapter();
+     //   recyclerView.setAdapter(adapter);
+
+        // Configurar los datos en el adaptador
+
+        return view;
     }
+
 
     public static ListadoVideojuegos newInstance(@StringRes int textId) {
         ListadoVideojuegos frag = new ListadoVideojuegos();
