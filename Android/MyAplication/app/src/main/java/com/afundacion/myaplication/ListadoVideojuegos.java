@@ -6,11 +6,18 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.toolbox.JsonArrayRequest;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -65,12 +72,27 @@ public class ListadoVideojuegos extends Fragment {
         View view = inflater.inflate(R.layout.fragment_listado_videojuegos, container, false);
 
         View recyclerView = view.findViewById(R.id.recyclerView);
-     //   recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-     //   adapter = new MyAdapter();
-     //   recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        MyAdapter adapter = new MyAdapter();
+        recyclerView.setAdapter(adapter);
 
         // Configurar los datos en el adaptador
 
+
+
+
+        JsonArrayRequest request = new JsonArrayRequest(
+                Request.Method.GET,
+
+
+                null
+                new Response.Listener<JsonArray>(){
+
+                }
+
+
+
+        )
         return view;
     }
 
