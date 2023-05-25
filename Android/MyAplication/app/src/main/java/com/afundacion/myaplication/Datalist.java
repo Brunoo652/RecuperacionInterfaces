@@ -8,11 +8,10 @@ public class Datalist {
     private String url;
     private String desc;
 
-
     public Datalist(JSONObject json) throws JSONException {
         this.nombre = json.getString("nombre");
         this.desc = json.getString("descripcion");
-        this.url = json.getString("url");
+        this.url = json.getString("imagen_url");
     }
 
     public String getDesc() {

@@ -86,7 +86,7 @@ public class ListadoVideojuegos extends Fragment {
         View view = inflater.inflate(R.layout.fragment_listado_videojuegos, container, false);
 
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
-        Activity activity = this;
+        Activity activity = getActivity();
         JsonArrayRequest request = new JsonArrayRequest(
                 Request.Method.GET,
                 "https://raw.githubusercontent.com/CarlosAfundacion/EXAMEN/main/games.json",
@@ -107,7 +107,6 @@ public class ListadoVideojuegos extends Fragment {
                             recyclerView.setAdapter(myAdapter);
                             recyclerView.setLayoutManager(new LinearLayoutManager(activity));
                         }
-
                     }
                 },
                 new Response.ErrorListener() {
@@ -116,11 +115,10 @@ public class ListadoVideojuegos extends Fragment {
                         Toast.makeText(view.getContext(),"Error",Toast.LENGTH_SHORT).show();
                     }
                 });
-        RequestQueue cola = Volley.newRequestQueue(activity);
+        RequestQueue cola = Volley.newRequestQueue(getActivity());
         cola.add(request);
         return view;
     }
-
 
     public static ListadoVideojuegos newInstance(@StringRes int textId) {
         ListadoVideojuegos frag = new ListadoVideojuegos();
@@ -132,15 +130,18 @@ public class ListadoVideojuegos extends Fragment {
         return frag;
     }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    @SuppressLint("MissingInflatedId")
+    public View onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState, LayoutInflater inflater, ViewGroup container) {
         super.onViewCreated(view, savedInstanceState);
+
+        View layout = inflater.inflate(R.layout.fragment_listado_videojuegos, container, false);
 
         if (getArguments() != null) {
             String text = getString(getArguments().getInt(TEXT_ID));
-            ((TextView) view.findViewById(R.id.text)).setText(text);
+            ((TextView) layout.findViewById(R.id.text)).setText(text);
         } else {
             throw new IllegalArgumentException("Argument " + TEXT_ID + " is mandatory");
         }
+        return layout;
     }
 }
