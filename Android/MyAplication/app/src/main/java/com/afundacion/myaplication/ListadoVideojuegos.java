@@ -1,5 +1,8 @@
 package com.afundacion.myaplication;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -7,16 +10,26 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -69,30 +82,42 @@ public class ListadoVideojuegos extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.fragment_listado_videojuegos, container, false);
 
-        View recyclerView = view.findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        MyAdapter adapter = new MyAdapter();
-        recyclerView.setAdapter(adapter);
-
-        // Configurar los datos en el adaptador
-
-
-
-
+        RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
+        Activity activity = this;
         JsonArrayRequest request = new JsonArrayRequest(
                 Request.Method.GET,
+                "https://raw.githubusercontent.com/CarlosAfundacion/EXAMEN/main/games.json",
+                null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        List<Datalist> allthedata = new ArrayList<>();
+                        for (int i=0;i<response.length();i++){
+                            try {
+                                JSONObject videojuego = response.getJSONObject(i);
+                                Datalist datalist = new Datalist(videojuego);
+                                allthedata.add(datalist);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            MyAdapter myAdapter =  new MyAdapter(allthedata, activity);
+                            recyclerView.setAdapter(myAdapter);
+                            recyclerView.setLayoutManager(new LinearLayoutManager(activity));
+                        }
 
-
-                null
-                new Response.Listener<JsonArray>(){
-
-                }
-
-
-
-        )
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(view.getContext(),"Error",Toast.LENGTH_SHORT).show();
+                    }
+                });
+        RequestQueue cola = Volley.newRequestQueue(activity);
+        cola.add(request);
         return view;
     }
 
@@ -106,18 +131,16 @@ public class ListadoVideojuegos extends Fragment {
 
         return frag;
     }
-    public View onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState, LayoutInflater inflater, ViewGroup container) {
-        super.onViewCreated(view, savedInstanceState);
 
-        View layout = inflater.inflate(R.layout.fragment_home, container, false);
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
         if (getArguments() != null) {
             String text = getString(getArguments().getInt(TEXT_ID));
-            ((TextView) layout.findViewById(R.id.text)).setText(text);
+            ((TextView) view.findViewById(R.id.text)).setText(text);
         } else {
             throw new IllegalArgumentException("Argument " + TEXT_ID + " is mandatory");
         }
-
-        return layout;
     }
 }

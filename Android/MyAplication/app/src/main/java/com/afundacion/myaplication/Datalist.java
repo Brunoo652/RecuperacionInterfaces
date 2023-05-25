@@ -1,14 +1,18 @@
 package com.afundacion.myaplication;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class Datalist {
     private String nombre;
     private String url;
     private String desc;
 
-    public Datalist(String nombre, String url, String desc){
-        this.nombre = nombre;
-        this.url = url;
-        this.desc = desc;
+
+    public Datalist(JSONObject json) throws JSONException {
+        this.nombre = json.getString("nombre");
+        this.desc = json.getString("descripcion");
+        this.url = json.getString("url");
     }
 
     public String getDesc() {
