@@ -3,6 +3,7 @@ package com.afundacion.myaplication;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -103,12 +104,24 @@ public class ListadoVideojuegos extends Fragment {
                                 JSONObject videojuego = response.getJSONObject(i);
                                 Datalist datalist = new Datalist(videojuego);
                                 allthedata.add(datalist);
+
+
+                                // Si el elemento actual se selecciona, inicia la actividad DetailActivity y pasa la descripción como extra en el Intent
+                             //   if (datalist.isSelected()) {
+                                    Intent intent = new Intent(activity, DetailActivity.class);
+                                    intent.putExtra("description", datalist.getDesc());
+                                    startActivity(intent);
+                             //   }
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
                             MyAdapter myAdapter =  new MyAdapter(allthedata, activity);
                             recyclerView.setAdapter(myAdapter);
                             recyclerView.setLayoutManager(new LinearLayoutManager(activity));
+
+
+
+
                         }
                     }
                 },
@@ -120,9 +133,6 @@ public class ListadoVideojuegos extends Fragment {
                 });
         RequestQueue cola = Volley.newRequestQueue(getActivity());
         cola.add(request);
-
-
-
         return view;
     }
 

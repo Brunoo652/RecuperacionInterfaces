@@ -33,6 +33,18 @@ public class ViewHolder extends RecyclerView.ViewHolder {
     public void showData(Datalist datalist, Activity activity) {
         NombreVideojuego.setText(datalist.getNombre());
         loadImage(datalist.getUrl(), activity);
+
+
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Aquí puedes obtener el elemento de datos seleccionado y pasarlos a otra actividad
+                Intent intent = new Intent(activity, DetailActivity.class);
+                intent.putExtra("descripcion", datalist.getDesc());
+                // Agrega cualquier otro dato adicional que desees pasar
+                activity.startActivity(intent);
+            }
+        });
     }
 
     private void loadImage(String url, Activity activity) {
