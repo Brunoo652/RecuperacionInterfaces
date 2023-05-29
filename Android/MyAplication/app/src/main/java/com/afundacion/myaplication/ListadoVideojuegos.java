@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -80,8 +81,10 @@ public class ListadoVideojuegos extends Fragment {
         }
     }
 
+    private ImageView irAlDetalle;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
 
         View view = inflater.inflate(R.layout.fragment_listado_videojuegos, container, false);
 
@@ -117,8 +120,20 @@ public class ListadoVideojuegos extends Fragment {
                 });
         RequestQueue cola = Volley.newRequestQueue(getActivity());
         cola.add(request);
+
+
+
         return view;
     }
+
+
+
+
+
+
+
+
+
 
     public static ListadoVideojuegos newInstance(@StringRes int textId) {
         ListadoVideojuegos frag = new ListadoVideojuegos();

@@ -1,6 +1,8 @@
 package com.afundacion.myaplication;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.View;
@@ -19,11 +21,13 @@ public class ViewHolder extends RecyclerView.ViewHolder {
 
     private final TextView NombreVideojuego;
     private final ImageView Caratula;
+   // Context context;
 
     public ViewHolder(@NonNull View itemView) {
         super(itemView);
         NombreVideojuego = itemView.findViewById(R.id.nombreVideojuego);
         Caratula = itemView.findViewById(R.id.caratula);
+        GoToDetail();
     }
 
     public void showData(Datalist datalist, Activity activity) {
@@ -57,5 +61,28 @@ public class ViewHolder extends RecyclerView.ViewHolder {
         connection.connect();
         InputStream input = connection.getInputStream();
         return BitmapFactory.decodeStream(input);
+    }
+
+    //on clik lisetener que lleve a la actividad del detalle
+    private void GoToDetail(){
+        //caratula
+        Caratula.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(itemView.getContext(), DetailActivity.class);
+                itemView.getContext().startActivity(intent);
+
+            }
+        });
+
+        //nombre
+        NombreVideojuego.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(itemView.getContext(), DetailActivity.class);
+                itemView.getContext().startActivity(intent);
+
+            }
+        });
     }
 }
