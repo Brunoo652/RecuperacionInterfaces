@@ -34,11 +34,25 @@ public class MyAdapter extends RecyclerView.Adapter<ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Datalist dataInPositionToBeRendered= allTheData.get(position);
         holder.showData(dataInPositionToBeRendered, activity);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (listener != null) {
+                    listener.onItemClick(position);
+                }
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return allTheData.size();
+    }
+
+    public interface OnItemClickListener {
+        //método para manejar el evento de selección de un videojuego en el adaptador.
+        void onItemClick(int position);
     }
 
 /*

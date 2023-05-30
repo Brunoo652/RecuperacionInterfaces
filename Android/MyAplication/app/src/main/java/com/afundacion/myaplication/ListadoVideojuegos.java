@@ -1,13 +1,10 @@
 package com.afundacion.myaplication;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Context;
+
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -16,8 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -39,7 +34,16 @@ import java.util.List;
  * Use the {@link ListadoVideojuegos#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ListadoVideojuegos extends Fragment {
+public class ListadoVideojuegos extends Fragment implements MyAdapter.OnItemClickListener {
+
+    //método para manejar el evento de selección de un videojuego en el adaptador.
+    @Override
+    public void onItemClick(int position) {
+        Datalist datalist = allthedata.get(position);
+        Intent intent = new Intent(getActivity(), DetailActivity.class);
+        intent.putExtra("descripcion", datalist.getDesc());
+        startActivity(intent);
+    }
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -82,11 +86,8 @@ public class ListadoVideojuegos extends Fragment {
         }
     }
 
-    private ImageView irAlDetalle;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-
         View view = inflater.inflate(R.layout.fragment_listado_videojuegos, container, false);
 
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
@@ -99,50 +100,36 @@ public class ListadoVideojuegos extends Fragment {
                     @Override
                     public void onResponse(JSONArray response) {
                         List<Datalist> allthedata = new ArrayList<>();
-                        for (int i=0;i<response.length();i++){
+                        Datalist datalist = null;
+                        for (int i = 0; i < response.length(); i++) {
                             try {
                                 JSONObject videojuego = response.getJSONObject(i);
-                                Datalist datalist = new Datalist(videojuego);
+                                datalist = new Datalist(videojuego);
                                 allthedata.add(datalist);
-
-
-                                // Si el elemento actual se selecciona, inicia la actividad DetailActivity y pasa la descripción como extra en el Intent
-                             //   if (datalist.isSelected()) {
-                                    Intent intent = new Intent(activity, DetailActivity.class);
-                                    intent.putExtra("description", datalist.getDesc());
-                                    startActivity(intent);
-                             //   }
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-                            MyAdapter myAdapter =  new MyAdapter(allthedata, activity);
-                            recyclerView.setAdapter(myAdapter);
-                            recyclerView.setLayoutManager(new LinearLayoutManager(activity));
-
-
-
-
                         }
+                        MyAdapter myAdapter = new MyAdapter(allthedata, activity);
+                        recyclerView.setAdapter(myAdapter);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(activity));
+
+                        Intent intent = new Intent(getActivity(), DetailActivity.class);
+                        intent.putExtra("descripcion", datalist.getDesc());
+                        startActivity(intent);
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(view.getContext(),"Error",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(view.getContext(), "Error", Toast.LENGTH_SHORT).show();
                     }
                 });
         RequestQueue cola = Volley.newRequestQueue(getActivity());
         cola.add(request);
+
         return view;
     }
-
-
-
-
-
-
-
-
 
 
     public static ListadoVideojuegos newInstance(@StringRes int textId) {
@@ -153,20 +140,5 @@ public class ListadoVideojuegos extends Fragment {
         frag.setArguments(args);
 
         return frag;
-    }
-
-    @SuppressLint("MissingInflatedId")
-    public View onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState, LayoutInflater inflater, ViewGroup container) {
-        super.onViewCreated(view, savedInstanceState);
-
-        View layout = inflater.inflate(R.layout.fragment_listado_videojuegos, container, false);
-
-        if (getArguments() != null) {
-            String text = getString(getArguments().getInt(TEXT_ID));
-            ((TextView) layout.findViewById(R.id.text)).setText(text);
-        } else {
-            throw new IllegalArgumentException("Argument " + TEXT_ID + " is mandatory");
-        }
-        return layout;
     }
 }

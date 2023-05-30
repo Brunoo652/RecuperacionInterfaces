@@ -38,10 +38,12 @@ public class ViewHolder extends RecyclerView.ViewHolder {
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Aquí puedes obtener el elemento de datos seleccionado y pasarlos a otra actividad
+                // Navegar a la pantalla de detalle y pasar la información detallada del videojuego como extras
                 Intent intent = new Intent(activity, DetailActivity.class);
+                intent.putExtra("nombre", datalist.getNombre());
                 intent.putExtra("descripcion", datalist.getDesc());
-                // Agrega cualquier otro dato adicional que desees pasar
+                intent.putExtra("imagenUrl", datalist.getUrl());
+
                 activity.startActivity(intent);
             }
         });
