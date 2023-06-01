@@ -28,7 +28,7 @@ public class ViewHolder extends RecyclerView.ViewHolder {
         super(itemView);
         NombreVideojuego = itemView.findViewById(R.id.nombreVideojuego);
         Caratula = itemView.findViewById(R.id.caratula);
-        GoToDetail();
+     //   GoToDetail();
     }
 
     public void showData(Datalist datalist, Activity activity) {
@@ -40,28 +40,18 @@ public class ViewHolder extends RecyclerView.ViewHolder {
             @Override
             public void onClick(View v) {
                 // Navegar a la pantalla de detalle y pasar la información detallada del videojuego como extras
-                Intent intent = new Intent(activity, DetailActivity.class);
+                Intent intent = new Intent(itemView.getContext(), DetailActivity.class);
                 intent.putExtra("nombre", datalist.getNombre());
                 intent.putExtra("descripcion", datalist.getDesc());
                 intent.putExtra("imagen_url", datalist.getUrl());
 
-                activity.startActivity(intent);
+                itemView.getContext().startActivity(intent);
             }
         });
     }
 
-
-
-    private Bitmap getBitmapFromUrl(String urlString) throws IOException {
-        URL url = new URL(urlString);
-        URLConnection connection = url.openConnection();
-        connection.connect();
-        InputStream input = connection.getInputStream();
-        return BitmapFactory.decodeStream(input);
-    }
-
     //on clik lisetener que lleve a la actividad del detalle
-    private void GoToDetail(){
+ /*   private void GoToDetail(){
         //caratula
         Caratula.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,9 +67,10 @@ public class ViewHolder extends RecyclerView.ViewHolder {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(itemView.getContext(), DetailActivity.class);
+
                 itemView.getContext().startActivity(intent);
 
             }
         });
-    }
+    }*/
 }

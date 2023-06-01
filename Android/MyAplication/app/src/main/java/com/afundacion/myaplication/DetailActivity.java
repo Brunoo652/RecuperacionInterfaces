@@ -13,6 +13,7 @@ public class DetailActivity extends AppCompatActivity {
     private TextView nombreTextView;
     private TextView descripcionTextView;
     private ImageView imagenImageView;
+    private Activity activity= this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,11 +27,12 @@ public class DetailActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        String descripcion = intent.getExtras().getString("descripcion");
-      //  String nombre = intent.getStringExtra("nombre");
-      //  Util.loadImage("imagen_url", Activity, Cara);
+        String descripcion =  intent.getStringExtra("descripcion");
+        String nombre = intent.getStringExtra("nombre");
+        Util.loadImage("imagen_url", this, imagenImageView);
         descripcionTextView.setText(descripcion);
-       // descripcionTextView.setText(nombre);
+        nombreTextView.setText(nombre);
+
 
     }
 }
