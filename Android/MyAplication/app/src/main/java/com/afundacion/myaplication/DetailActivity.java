@@ -29,7 +29,7 @@ public class DetailActivity extends AppCompatActivity {
 
         String descripcion =  intent.getStringExtra("descripcion");
         String nombre = intent.getStringExtra("nombre");
-        Util.loadImage("imagen_url", this, imagenImageView);
+        Util.loadImage("imagen_url", activity, imagenImageView);
         descripcionTextView.setText(descripcion);
         nombreTextView.setText(nombre);
 
