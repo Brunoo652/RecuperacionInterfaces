@@ -34,16 +34,16 @@ import java.util.List;
  * Use the {@link ListadoVideojuegos#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ListadoVideojuegos extends Fragment implements MyAdapter.OnItemClickListener {
+public class ListadoVideojuegos extends Fragment  {
 
     //método para manejar el evento de selección de un videojuego en el adaptador.
-    @Override
+  /*  @Override
     public void onItemClick(int position) {
         Datalist datalist = allthedata.get(position);
         Intent intent = new Intent(getActivity(), DetailActivity.class);
         intent.putExtra("descripcion", datalist.getDesc());
         startActivity(intent);
-    }
+    }*/
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -114,9 +114,6 @@ public class ListadoVideojuegos extends Fragment implements MyAdapter.OnItemClic
                         recyclerView.setAdapter(myAdapter);
                         recyclerView.setLayoutManager(new LinearLayoutManager(activity));
 
-                        Intent intent = new Intent(getActivity(), DetailActivity.class);
-                        intent.putExtra("descripcion", datalist.getDesc());
-                        startActivity(intent);
                     }
                 },
                 new Response.ErrorListener() {

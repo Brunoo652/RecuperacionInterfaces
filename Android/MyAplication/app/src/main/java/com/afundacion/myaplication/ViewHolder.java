@@ -1,7 +1,8 @@
 package com.afundacion.myaplication;
 
+import static com.afundacion.myaplication.Util.loadImage;
+
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -32,7 +33,7 @@ public class ViewHolder extends RecyclerView.ViewHolder {
 
     public void showData(Datalist datalist, Activity activity) {
         NombreVideojuego.setText(datalist.getNombre());
-        loadImage(datalist.getUrl(), activity);
+        Util.loadImage(datalist.getUrl(), activity, Caratula);
 
 
         itemView.setOnClickListener(new View.OnClickListener() {
@@ -42,32 +43,14 @@ public class ViewHolder extends RecyclerView.ViewHolder {
                 Intent intent = new Intent(activity, DetailActivity.class);
                 intent.putExtra("nombre", datalist.getNombre());
                 intent.putExtra("descripcion", datalist.getDesc());
-                intent.putExtra("imagenUrl", datalist.getUrl());
+                intent.putExtra("imagen_url", datalist.getUrl());
 
                 activity.startActivity(intent);
             }
         });
     }
 
-    private void loadImage(String url, Activity activity) {
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Bitmap image = getBitmapFromUrl(url);
-                    activity.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Caratula.setImageBitmap(image);
-                        }
-                    });
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        thread.start();
-    }
+
 
     private Bitmap getBitmapFromUrl(String urlString) throws IOException {
         URL url = new URL(urlString);

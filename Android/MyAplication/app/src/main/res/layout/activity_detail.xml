@@ -12,7 +12,7 @@
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="140dp"
+        android:layout_marginTop="56dp"
         android:text="Esta actividad es el detalle del videojuego"
         android:textAlignment="center"
         android:textColor="@color/black"
@@ -21,13 +21,34 @@
         tools:layout_editor_absoluteX="16dp"></TextView>
 
     <TextView
+        android:id="@+id/nombreDetalleVideojuego"
+        android:layout_width="265dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+
+    <ImageView
+        android:layout_width="230dp"
+        android:layout_height="274dp"
+        android:layout_marginTop="40dp"
+        android:id="@+id/ImagenDetalleVideojuego"
+        app:layout_constraintBottom_toTopOf="@+id/textoDescripcion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nombreDetalleVideojuego"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
         android:id="@+id/textoDescripcion"
-        android:layout_width="413dp"
-        android:layout_height="350dp"
-        android:layout_marginBottom="188dp"
+        android:layout_width="383dp"
+        android:layout_height="192dp"
+        android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="-1dp"></TextView>
+        tools:layout_editor_absoluteX="12dp"></TextView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -35,14 +35,6 @@ public class MyAdapter extends RecyclerView.Adapter<ViewHolder> {
         Datalist dataInPositionToBeRendered= allTheData.get(position);
         holder.showData(dataInPositionToBeRendered, activity);
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (listener != null) {
-                    listener.onItemClick(position);
-                }
-            }
-        });
     }
 
     @Override
